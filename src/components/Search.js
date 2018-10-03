@@ -1,47 +1,50 @@
 import React from 'react';
-import firebase from 'firebase';
+import Suggestions from './Suggestions';
+import { getData } from '../firestore/getData';
 
 class Search extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             query: '',
+            data: [],
             results: []
         };
 
         this.getResults = this.getResults.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.renderResults = this.renderResults.bind(this);
-        this.setResults = this.setResults.bind(this);
     }
 
-    setResults(results){
-        this.setState({
-            results: results
-        });
+    componentDidMount(){
+        let dataPromise = getData();
+
+        dataPromise.then((results) => {
+            this.setState({
+                data: results
+            });
+            console.log(this.state.data);
+        })
+
     }
 
     getResults = () => {
-        const db = firebase.firestore();
-        const dbRef = db.collection('flowers');
-        const dbQuery = dbRef.where("name", "==", this.state.query);
-        var dbPromise = dbQuery.get(); 
+        const data = this.state.data;
+        const query = this.state.query;
+        let results = [];
 
-        const setStateResults = (results) => {
-            this.setResults(results);
-        }
-        
-        dbPromise.then((querySnapshot) => {
-            var results = [];
-            querySnapshot.forEach((doc) => {
-                results.push(doc.data());
-            });
-            setStateResults(results);
-        })
-        .catch((error) => {
-            console.log("Error getting documnents: ", error);
+        console.log(query);
+
+        data.forEach((doc) => {
+            if(doc.name.includes(query))
+                results.push(doc);
         });
-        
+
+        if(results.length > 0){
+            this.setState({
+                results: results
+            });
+        }
     }
 
     handleChange = (event) => {
@@ -51,12 +54,8 @@ class Search extends React.Component {
     }
 
     renderResults(){
-        
-        const results = this.state.results.map(result => (
-            <li key={result.name}>{result.name}</li>
-        ));
-
-        return <ul>{results}</ul>
+        if(this.state.results.length > 0)
+            return <Suggestions results={this.state.results}/>
     }
 
     render(){
@@ -65,7 +64,7 @@ class Search extends React.Component {
                 <h1>{this.state.query}</h1>
                 <input type='text' placeholder='Search' value={this.state.query} onChange={this.handleChange} />
                 <button onClick={this.getResults}>Search</button>
-                <div>{this.renderResults()}</div>
+                {this.renderResults()}
             </div>
         );
     }
