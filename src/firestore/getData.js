@@ -12,11 +12,12 @@ export const getData = () => {
         querySnapshot.forEach((doc) => {
             results.push(doc.data());
         });
-        console.log('Data received.');
-        return results
     })
-    .catch((error) => {
-        console.log("Error getting documnents: ", error);
+    .then(() => {
+        if(results.length > 0)
+            return results
+        else
+            console.log("Error getting documents");
     });
 
     return dataPromise

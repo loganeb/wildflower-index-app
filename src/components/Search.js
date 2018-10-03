@@ -62,7 +62,7 @@ class Search extends React.Component {
         return(
             <div>
                 <h1>{this.state.query}</h1>
-                <input type='text' placeholder='Search' value={this.state.query} onChange={this.handleChange} />
+                <input type='text' placeholder='Search' onChange={this.handleChange} />
                 <button onClick={this.getResults}>Search</button>
                 {this.renderResults()}
             </div>
