@@ -1,5 +1,5 @@
 import React from 'react';
-import Suggestions from './Suggestions';
+import Results from './Results';
 import { getData } from '../firestore/getData';
 
 class Search extends React.Component {
@@ -30,19 +30,23 @@ class Search extends React.Component {
 
     getResults = () => {
         const data = this.state.data;
-        const query = this.state.query;
+        const query = this.state.query.toUpperCase();
         let results = [];
 
         console.log(query);
 
         data.forEach((doc) => {
-            if(doc.name.includes(query))
+            if(doc.name.toUpperCase().includes(query))
                 results.push(doc);
         });
 
         if(results.length > 0){
             this.setState({
                 results: results
+            });
+        }else{
+            this.setState({
+                results: []
             });
         }
     }
@@ -55,7 +59,7 @@ class Search extends React.Component {
 
     renderResults(){
         if(this.state.results.length > 0)
-            return <Suggestions results={this.state.results}/>
+            return <Results results={this.state.results}/>
     }
 
     render(){

@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import firebase from 'firebase';
 import registerServiceWorker from './registerServiceWorker';
+import Modal from 'react-modal';
 
 //Config and initialize firebase
 var config = {
@@ -19,6 +20,8 @@ firebase.initializeApp(config);
 const firestore = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
 firestore.settings(settings);
+
+Modal.setAppElement('#root');
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
