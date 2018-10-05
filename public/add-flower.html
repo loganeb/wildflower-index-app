@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+
+    <body style="background-color:black; color: white">
+            Document Name:<br>
+            <input type="text" id="doc-name"><br>
+            Name:<br>
+            <input type="text" id="name"><br>
+            binomial:<br>
+            <input type="text" id="binomial"><br>
+            Color:<br>
+            <input type="text" id="color"><br>
+            Habitat:<br>
+            <input type="text" id="habitat"><br>
+            Tags:<br>
+            <input type="text" id="tags"><br>
+            Image:<br>
+            <input type="text" id="image"><br>
+            ID:<br>
+            <input type="text" id="id"><br>
+            Attribution:<br>
+            <input type="text" id="attribution"><br>
+            Description:<br>
+            <textarea class="text" rows="20" cols="50" id="description"></textarea><br>
+            <button id="submit" onClick="submit()">Submit</button>
+       
+
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyB2mSaVQXao_LOqphYahR84ZwFkx06ApPg",
+                authDomain: "flower-app-10958.firebaseapp.com",
+                databaseURL: "https://flower-app-10958.firebaseio.com",
+                projectId: "flower-app-10958",
+                storageBucket: "flower-app-10958.appspot.com",
+                messagingSenderId: "798314127220"
+            };
+            firebase.initializeApp(config);
+
+            const firestore = firebase.firestore();
+            const settings = {timestampsInSnapshots: true};
+            firestore.settings(settings);
+
+            function submit() {
+                const newDoc = {
+                    name: document.getElementById('name').value,
+                    binomial: document.getElementById('binomial').value,
+                    color: document.getElementById('color').value,
+                    habitat: document.getElementById('habitat').value,
+                    tags: document.getElementById('tags').value,
+                    image: document.getElementById('image').value,
+                    id: parseInt(document.getElementById('id').value),
+                    attribution: document.getElementById('attribution').value,
+                    description: document.getElementById('description').value
+                }
+
+                console.log(newDoc);
+
+                sendData(newDoc, document.getElementById('doc-name').value);
+            }
+
+            function sendData(newDoc, docName) {
+                const db = firebase.firestore();
+                const dbRef = db.collection('flowers');
+
+                dbRef.doc(docName).set(newDoc, {merge: true})
+                .then(() => {
+                    console.log('Data sent')
+                })
+                .catch((error) => {
+                    console.log("Error sending data: " + error);
+                })
+            }
+        </script>
+    </body>
+</html>

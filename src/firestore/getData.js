@@ -13,6 +13,9 @@ export const getData = () => {
             results.push(doc.data());
         });
     })
+    .catch((error) => {
+        console.log("Error getting documents: " + error);
+    })
     .then(() => {
         if(results.length > 0)
             return results

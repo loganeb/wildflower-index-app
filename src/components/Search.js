@@ -30,14 +30,19 @@ class Search extends React.Component {
 
     getResults = () => {
         const data = this.state.data;
-        const query = this.state.query.toUpperCase();
+        const parsedQuery = this.state.query.toUpperCase().split(/[+,-]/);
+
         let results = [];
 
-        console.log(query);
+        console.log(parsedQuery);
 
         data.forEach((doc) => {
-            if(doc.name.toUpperCase().includes(query))
-                results.push(doc);
+            parsedQuery.forEach((queryWord) => {
+                if(doc.tags.toUpperCase().includes(queryWord)){
+                    if(!results.find((result) => result.id === doc.id))
+                        results.push(doc);
+                }
+            });
         });
 
         if(results.length > 0){

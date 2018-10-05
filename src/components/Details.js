@@ -20,9 +20,9 @@ const Details = (props) => {
                         />
                     </div>
                     <div className="col detailsText">
-                        <p className="description"></p>
-                        <p className="color">Color: </p>
-                        <p className="habitat">Habitat: </p>
+                        <p className="description">{props.result.description}</p>
+                        <p className="color">Color: {props.result.color}</p>
+                        <p className="habitat">Habitat: {props.result.habitat}</p>
                     </div>
                 </div>
             </div>
