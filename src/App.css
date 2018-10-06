@@ -22,7 +22,33 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.results-list{
+  margin: 0;
+  margin-top: 10px;
+  justify-content: center;
 }
+
+.result{
+  max-width: 300px;
+  min-width: 160px;
+  margin: 5px;
+  text-align: center;
+  border: 0.5px solid rgb(148, 147, 147);
+  border-radius: 10px;
+  justify-content: center;
+}
+
+.result:hover{
+  box-shadow: 1px 1px 3px 1px rgba(10,10,10);
+}
+
+
+.result-image{
+  max-height: 100%;
+  padding: 10px;
+  display: block;
+  margin: auto;
+}
+
+
+

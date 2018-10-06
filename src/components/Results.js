@@ -34,32 +34,39 @@ class Results extends React.Component {
             return {
                 name: '',
                 image: '',
+                description: '',
             }
         }
 
         const results = this.props.results;
         const currentID = this.state.currentID;
-        const currentResult = results.find((result) => result.id === currentID);
 
-        return currentResult;
+
+        return results.find((result) => result.id === currentID);
     }
 
    renderResults(){
         return(
             this.props.results.map(result => (
-                <div key={result.id} className="result col-sm">
+                <a 
+                    key={result.id} 
+                    onClick={() => this.openDetails(result.id)}
+                    className="result col container-fluid"
+                >
                     {result.name}
-                    <a onClick={() => this.openDetails(result.id)}>
-                        <img alt={result.name} src={result.image} />
-                    </a>
-                </div>
+                    <img 
+                        className="img-fluid result-image" 
+                        alt={result.name} 
+                        src={result.image} 
+                    />
+                </a>
             ))
         );
     }
     
     render(){
         return(
-            <div className="results-list container-fluid">
+            <div className="results-list container-fluid row">
                 {this.renderResults()}
                 <Details 
                     result={this.getCurrentResult()}

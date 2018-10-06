@@ -13,13 +13,14 @@ const Details = (props) => {
             <h2>{props.result.name}</h2>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col detailsImage">
+                    <div className="col details-image">
                         <img 
+                            className="img-fluid"
                             src={props.result.image} 
                             alt={props.result.name}
                         />
                     </div>
-                    <div className="col detailsText">
+                    <div className="col details-text">
                         <p className="description">{props.result.description}</p>
                         <p className="color">Color: {props.result.color}</p>
                         <p className="habitat">Habitat: {props.result.habitat}</p>
