@@ -16,29 +16,26 @@ class Search extends React.Component {
         this.renderResults = this.renderResults.bind(this);
     }
 
-    componentDidMount(){
+    componentWillMount(){
         let dataPromise = getData();
 
         dataPromise.then((results) => {
             this.setState({
                 data: results
             });
-            console.log(this.state.data);
         })
 
     }
 
-    getResults = () => {
+    getResults = (query) => {
         const data = this.state.data;
-        const parsedQuery = this.state.query.toUpperCase().split(/[+,-]/);
+        const parsedQuery = query.toUpperCase().split(/[+, -]/);
 
         let results = [];
 
-        console.log(parsedQuery);
-
         data.forEach((doc) => {
             parsedQuery.forEach((queryWord) => {
-                if(doc.tags.toUpperCase().includes(queryWord)){
+                if(queryWord.length > 0 && doc.tags.toUpperCase().includes(queryWord)){
                     if(!results.find((result) => result.id === doc.id))
                         results.push(doc);
                 }
@@ -57,8 +54,13 @@ class Search extends React.Component {
     }
 
     handleChange = (event) => {
+        const query = event.target.value;
+
+        if(query.length > 2)
+            this.getResults(query);
+
         this.setState({
-            query: event.target.value
+            query: query
         });
     }
 
@@ -69,10 +71,8 @@ class Search extends React.Component {
 
     render(){
         return(
-            <div>
-                <h1>{this.state.query}</h1>
+            <div className="Search">
                 <input type='text' placeholder='Search' onChange={this.handleChange} />
-                <button onClick={this.getResults}>Search</button>
                 {this.renderResults()}
             </div>
         );

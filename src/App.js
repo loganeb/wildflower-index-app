@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">N.A. Wildflower Index</h1>
+          <h1 className="App-title">North American Wildflower Index</h1>
         </header>
         <Search />
       </div>

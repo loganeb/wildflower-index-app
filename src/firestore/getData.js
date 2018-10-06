@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 //This function returns a Promise for an array of docs from
 //the firestore db
@@ -17,10 +17,7 @@ export const getData = () => {
         console.log("Error getting documents: " + error);
     })
     .then(() => {
-        if(results.length > 0)
-            return results
-        else
-            console.log("Error getting documents");
+        return results
     });
 
     return dataPromise

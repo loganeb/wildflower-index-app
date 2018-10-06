@@ -1,10 +1,9 @@
+body{
+  background: url('./images/background_scaled.jpg');
+  background-attachment: fixed;
+}
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
 }
 
 .App-header {
@@ -15,11 +14,24 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2em;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.Search{
+  margin-top: 10px;
+}
+
+.Search > input {
+  min-width: 200px;
+  width: 40%;
+  height: 40px;
+  font-size: 1.3em;
 }
 
 .results-list{
@@ -29,25 +41,30 @@
 }
 
 .result{
-  max-width: 300px;
-  min-width: 160px;
+  max-width: 280px;
+  min-width: 200px;
   margin: 5px;
   text-align: center;
   border: 0.5px solid rgb(148, 147, 147);
   border-radius: 10px;
-  justify-content: center;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  background-color: white;
+  opacity: 0.9;
 }
 
 .result:hover{
   box-shadow: 1px 1px 3px 1px rgba(10,10,10);
+  opacity: 1.0;
 }
 
 
 .result-image{
   max-height: 100%;
-  padding: 10px;
   display: block;
   margin: auto;
+  border-radius: 10px;
 }
 
 
