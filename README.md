@@ -1,4 +1,4 @@
-#Wildflower App
+# Wildflower App
 
 This app was built using [React](https://github.com/facebook/react) and [Firebase](https://firebase.google.com/).
 
