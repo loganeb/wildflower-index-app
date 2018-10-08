@@ -1,6 +1,7 @@
 import React from 'react';
 import Details from './Details';
 
+//Results objects receive results as props from Search
 class Results extends React.Component {
     constructor(props){
         super(props);
@@ -15,6 +16,8 @@ class Results extends React.Component {
         this.renderResults = this.renderResults.bind(this);
     }
 
+    //Passed as prop to Details to open Modal containing
+    //Search result details.
     openDetails(ID){
         this.setState({
             detailsAreOpen: true,
@@ -22,6 +25,7 @@ class Results extends React.Component {
         })
     }
 
+    //Passed as prop to Details to close Modal on user command
     closeDetails(){
         this.setState({
             detailsAreOpen: false,
@@ -29,6 +33,8 @@ class Results extends React.Component {
         })
     }
 
+    //Must pass an empty result to Details to prevent error when
+    //no result has been selected
     getCurrentResult(){
         if(this.state.currentID === null){
             return {
@@ -51,14 +57,15 @@ class Results extends React.Component {
                 <a 
                     key={result.id} 
                     onClick={() => this.openDetails(result.id)}
-                    className="result col container-fluid"
+                    className="result col container"
                 >
-                    {result.name}
-                    <img 
-                        className="img-fluid result-image" 
+                    <span className="result-title">{result.name}</span>
+
+                    <span className="container-fluid result-img-cont"><img 
+                        className="img-fluid result-img" 
                         alt={result.name} 
                         src={result.image} 
-                    />
+                    /></span>
                 </a>
             ))
         );
@@ -72,6 +79,7 @@ class Results extends React.Component {
                     result={this.getCurrentResult()}
                     detailsAreOpen={this.state.detailsAreOpen}
                     closeDetails={this.closeDetails}
+                    className="Details"
                 />
             </div>
         );

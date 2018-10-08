@@ -11,8 +11,6 @@ class App extends Component {
           <a 
           href="http://loganbynes.com/" 
           className="author" 
-          target="_blank"
-          rel="noopener noreferrer"
           >
             Built by Logan Bynes
           </a>

@@ -1,6 +1,18 @@
+/*
+Built by Logan Bynes
+
+This React app utilizes the cloud storage, database and
+hosting features of Firebase.
+
+The config variable below is required for Firebase and can
+be modified for hosting on a new app page.
+
+The app also uses react-modal to display a popover window when
+a search result is clicked.
+*/
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -22,6 +34,7 @@ const firestore = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
 firestore.settings(settings);
 
+//Enable accessiblity features of Modal 
 Modal.setAppElement('#root');
 
 ReactDOM.render(<App />, document.getElementById('root'));
