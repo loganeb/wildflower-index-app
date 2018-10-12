@@ -25,7 +25,7 @@ const Details = (props) => {
                         <p className="description">{props.result.description}</p>
                         <div className="color"><h4>Color: </h4>{props.result.color}</div>
                         <br></br><div className="habitat"><h4>Habitat: </h4>{props.result.habitat}</div>
-                        <br></br><div className="binomial"><h4>Binomial Name: </h4><i>{props.result.binomial}</i></div>
+                        <br></br><div className="binomial"><h4>Scientific Name: </h4><i>{props.result.binomial}</i></div>
                     </div>
                 </div>
             </div>
